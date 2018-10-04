@@ -1,17 +1,16 @@
 require 'statements/statement'
 
 class TextStatement < Statement
-  def self.value(customer)
-    result = "Rental Record for #{customer.name}\n"
-    customer.rentals.each do |rental|
-      
-      #show figures for this rental
-      result += "\t#{rental.movie.title}\t#{rental.charge}\n"
-    end
-    
-    #add footer lines
-    result += "Amount owed is #{customer.total_charge}\n"
-    result += "You earned #{customer.total_frequent_renter_points} frequent renter points"
-    result
-  end  
+  def self.header_string(customer)
+    "Rental Record for #{customer.name}\n"
+  end
+  
+  def self.each_rental_string(rental)
+    "\t#{rental.movie.title}\t#{rental.charge}\n"
+  end
+  
+  def self.footer_string(customer)
+    "Amount owed is #{customer.total_charge}\n" +
+    "You earned #{customer.total_frequent_renter_points} frequent renter points"
+  end
 end
